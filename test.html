@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .path{
+            stroke-dasharray:1500;
+            stroke-dashoffset:1500;
+            animation:dash 1s 1s linear forwards 1;
+            -webkit-animation:dash 1s 1s linear forwards 1;
+        }
+        @keyframes dash{
+            to{
+                stroke-dashoffset:0
+            }
+        }
+        @-webkit-keyframes dash{
+            to{
+                stroke-dashoffset:0
+            }
+        }
+        #OneCanvas{
+            background: #f9f9f9;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -200px 0 0 -300px;
+        }
+    </style>
+</head>
+<body>
+<svg version="1.1" id="MM" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 width="960px" height="560px" viewBox="0 0 960 560" enable-background="new 0 0 960 560" xml:space="preserve">
+<circle class="path" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" cx="469.19" cy="257.051" r="218.987"/>
+</svg>
+<div id="msg"></div>
+<canvas id="OneCanvas" width="600" height="400">Your browser does not support the canvas element.</canvas>
+<script type="text/javascript">
+    function Boy(name,age,talk){
+        this.name = name || "Amy";
+        this.age = age || 12;
+        this.talk = talk || "Hello world!";
+        this.sayMore = function(str){
+            alert(str);
+        };
+        this.setAge = function(num){
+            this.age = num
+        };
+        this.getAge = function(){
+            return this.age;
+        }
+    }
+</script>
+<script type="text/javascript">
+    draw20("OneCanvas");
+    function draw20(id) {
+                    var canvas = document.getElementById(id);
+                    if (canvas == null)
+                            return false;
+                    var context = canvas.getContext("2d");
+
+                    var interal = setInterval(function () {
+                            move(context);
+                        }, 1);
+                }
+
+            var x = 100;//矩形开始坐标
+            var y = 100;//矩形结束坐标
+            var mx = 0;//0右1左
+            var my = 0; //0下1上
+            var ml = 1;//每次移动长度
+            var w = 20;//矩形宽度
+            var h = 20;//矩形高度
+            var cw = 400;//canvas宽度
+            var ch = 300; //canvas高度
+
+
+            function move(context) {
+                    context.clearRect(0, 0, 400, 300);
+                    context.fillStyle = "#EEEEFF";
+                    context.fillRect(0, 0, 400, 300);
+                    context.fillStyle = "red";
+                    context.fillRect(x, y, w, h);
+                    if (mx == 0) {
+                            x = x + ml;
+                            if (x >= cw-w) {
+                                    mx = 1;
+                                }
+                        }
+                    else {
+                            x = x - ml;
+                            if (x <= 0) {
+                                    mx = 0;
+                                }
+                        }
+                    if (my == 0) {
+                            y = y + ml;
+                            if (y >= ch-h) {
+                                    my = 1;
+                                }
+                        }
+                    else {
+                            y = y - ml;
+                            if (y <= 0) {
+                                    my = 0;
+                                }
+                        }
+
+                }
+</script>
+</body>
+</html>
